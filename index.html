@@ -22,6 +22,11 @@
           navigator.userAgent
         );
       }
+
+      // Function to check if the device is in mobile view mode
+      function isMobileViewMode() {
+        return window.innerWidth <= 768; // Adjust the width threshold as needed
+      }
     </script>
     <!-- Google Tag Manager -->
     <script>
@@ -57,7 +62,7 @@
       document
         .getElementById("purchaseButton")
         .addEventListener("click", function () {
-          if (isMobileDevice()) {
+          if (isMobileDevice() && isMobileViewMode()) {
             // Log event to console
             console.log("Purchase event triggered");
 
@@ -84,7 +89,7 @@
             });
           } else {
             console.log(
-              "Purchase event not triggered - Not on a mobile device"
+              "Purchase event not triggered - Not on a mobile device or not in mobile view mode"
             );
           }
         });
@@ -93,7 +98,7 @@
       document
         .getElementById("callButton")
         .addEventListener("click", function () {
-          if (isMobileDevice()) {
+          if (isMobileDevice() && isMobileViewMode()) {
             // Log event to console
             console.log("Click to call event triggered");
 
@@ -110,7 +115,7 @@
             });
           } else {
             console.log(
-              "Click to call event not triggered - Not on a mobile device"
+              "Click to call event not triggered - Not on a mobile device or not in mobile view mode"
             );
           }
         });
