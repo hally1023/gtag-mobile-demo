@@ -16,9 +16,10 @@
       gtag("js", new Date());
       gtag("config", "GA_MEASUREMENT_ID");
 
-      // Function to detect if the user is on a mobile device
-      function isMobileDevice() {
-        return /Mobi|Android/i.test(navigator.userAgent);
+      // Function to detect if the user is on a specific mobile device
+      function isSpecificMobileDevice() {
+        // Add conditions to detect specific mobile devices
+        return /Google Pixel 8 Pro|Android/i.test(navigator.userAgent);
       }
     </script>
     <!-- Google Tag Manager -->
@@ -55,7 +56,7 @@
       document
         .getElementById("purchaseButton")
         .addEventListener("click", function () {
-          if (isMobileDevice()) {
+          if (isSpecificMobileDevice()) {
             // Log event to console
             console.log("Purchase event triggered");
 
@@ -82,7 +83,7 @@
             });
           } else {
             console.log(
-              "Purchase event not triggered - Not on a mobile device"
+              "Purchase event not triggered - Not on a specific mobile device"
             );
           }
         });
@@ -91,7 +92,7 @@
       document
         .getElementById("callButton")
         .addEventListener("click", function () {
-          if (isMobileDevice()) {
+          if (isSpecificMobileDevice()) {
             // Log event to console
             console.log("Click to call event triggered");
 
@@ -108,7 +109,7 @@
             });
           } else {
             console.log(
-              "Click to call event not triggered - Not on a mobile device"
+              "Click to call event not triggered - Not on a specific mobile device"
             );
           }
         });
