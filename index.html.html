@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gtag and GTM Demo</title>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "GA_MEASUREMENT_ID");
+
+      // Function to detect if the user is on a mobile device
+      function isMobileDevice() {
+        return /Mobi|Android/i.test(navigator.userAgent);
+      }
+    </script>
+  </head>
+  <body>
+    <button id="purchaseButton">Purchase</button>
+    <button id="callButton">Call Now</button>
+
+    <script>
+      // Event listener for the purchase button
+      document
+        .getElementById("purchaseButton")
+        .addEventListener("click", function () {
+          if (isMobileDevice()) {
+            // Log event to console
+            console.log("Purchase event triggered");
+
+            // Push event to dataLayer
+            window.dataLayer.push({
+              event: "purchase",
+              ecommerce: {
+                transaction_id: "T12345",
+                affiliation: "Online Store",
+                value: 35.43,
+                currency: "USD",
+                tax: 4.9,
+                shipping: 5.99,
+                items: [
+                  {
+                    item_name: "Product Name",
+                    item_id: "P12345",
+                    price: 29.99,
+                    quantity: 1,
+                  },
+                ],
+              },
+              send_to: "GA_MEASUREMENT_ID",
+            });
+          } else {
+            console.log(
+              "Purchase event not triggered - Not on a mobile device"
+            );
+          }
+        });
+
+      // Event listener for the call button
+      document
+        .getElementById("callButton")
+        .addEventListener("click", function () {
+          if (isMobileDevice()) {
+            // Log event to console
+            console.log("Click to call event triggered");
+
+            // Push event to dataLayer
+            window.dataLayer.push({
+              event: "asc_click_to_call",
+              event_owner: "d2c",
+              page_type: "home",
+              page_url: "https://www.oregansvolkswagenhalifax.com/",
+              comm_phone_number: "902 453-2790",
+              department: "Sales",
+              affiliation: "",
+              send_to: "G-Z5Q8Z5C7KF",
+            });
+          } else {
+            console.log(
+              "Click to call event not triggered - Not on a mobile device"
+            );
+          }
+        });
+    </script>
+  </body>
+</html>
