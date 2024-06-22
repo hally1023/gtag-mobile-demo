@@ -18,12 +18,7 @@
 
       // Function to detect if the user is on a mobile device
       function isMobileDevice() {
-        const isMobile =
-          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Pixel 8 Pro/i.test(
-            navigator.userAgent
-          );
-        const isViewportMobile = window.innerWidth < 768; // Adjust the viewport width as needed
-        return isMobile && !isViewportMobile;
+        return /Mobi|Android/i.test(navigator.userAgent);
       }
     </script>
     <!-- Google Tag Manager -->
@@ -45,4 +40,78 @@
     <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-KPNRB
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KPNRB2H"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <button id="purchaseButton">Purchase</button>
+    <button id="callButton">Call Now</button>
+
+    <script>
+      // Event listener for the purchase button
+      document
+        .getElementById("purchaseButton")
+        .addEventListener("click", function () {
+          if (isMobileDevice()) {
+            // Log event to console
+            console.log("Purchase event triggered");
+
+            // Push event to dataLayer
+            window.dataLayer.push({
+              event: "purchase",
+              ecommerce: {
+                transaction_id: "T12345",
+                affiliation: "Online Store",
+                value: 35.43,
+                currency: "USD",
+                tax: 4.9,
+                shipping: 5.99,
+                items: [
+                  {
+                    item_name: "Product Name",
+                    item_id: "P12345",
+                    price: 29.99,
+                    quantity: 1,
+                  },
+                ],
+              },
+              send_to: "G-Z1Z1Z1Z1ZZ",
+            });
+          } else {
+            console.log(
+              "Purchase event not triggered - Not on a mobile device"
+            );
+          }
+        });
+
+      // Event listener for the call button
+      document
+        .getElementById("callButton")
+        .addEventListener("click", function () {
+          if (isMobileDevice()) {
+            // Log event to console
+            console.log("Click to call event triggered");
+
+            // Push event to dataLayer
+            window.dataLayer.push({
+              event: "asc_click_to_call",
+              event_owner: "hally",
+              page_type: "home",
+              page_url: "https://www.test.com/",
+              comm_phone_number: "902-555-5555",
+              department: "Service",
+              affiliation: "",
+              send_to: "G-Z1Z1Z1Z1ZZ",
+            });
+          } else {
+            console.log(
+              "Click to call event not triggered - Not on a mobile device"
+            );
+          }
+        });
+    </script>
+  </body>
+</html>
